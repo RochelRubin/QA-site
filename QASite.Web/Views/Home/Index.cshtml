@@ -1,0 +1,33 @@
+﻿@model IndexViewModel
+
+<div class="container">
+    <main role="main" class="pb-3" style="margin-top: 80px;">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+                @foreach (var q in Model.Questions)
+                {
+                    <div class="card card-body bg-light">
+                        <h4>
+                            <a href="/question/viewquestion?id=@q.Id">@q.Title</a>
+                        </h4>
+                        <div>
+                            <span>Tags:</span>
+                            @foreach (var tags in q.QuestionTags)
+                            {
+                                <span class="badge badge-primary">@tags.Tag.Name</span>
+                            }
+                        </div>
+                        <div style="margin-top: 10px;">
+                            <p class="card-text">@(q.Text.Length < 200 ? @q.Text : $"{@q.Text.Substring(0, 200)}...")</p>
+                        </div>
+                        <span>Likes: @q.Likes.Count</span>
+                        <br />
+                        <span>@q.Answers.Count Answer(s)</span>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </main>
+</div>
